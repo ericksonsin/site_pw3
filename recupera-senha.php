@@ -30,7 +30,7 @@
                 <h1 class="text-center">
                     <a href="index.php">PW3</a>
                 </h1>
-                <p class="text-center">Faça login para iniciar a sua sessão</p>
+                <p class="text-center">Informe seu e-mail para recuperar a senha</p>
 
                 <form action="" method="">
 
@@ -38,26 +38,15 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
                         </div>
-                        <input type="text" name="email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
-                        </div>
-                        <input type="password" name="senha" class="form-control" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon1">
+                        <input type="mail" name="email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1">
                     </div>
 
                     <div class="form-group text-right">
-                        <button class="btn btn-primary">Entrar</button>
+                        <button class="btn btn-primary">Recuperar</button>
                     </div>
 
                     <p>
-                        <a href="recupera-senha.php">Esqueceu a senha?</a>
-                    </p>
-
-                    <p>
-                        <a href="registro.php">Criar uma conta</a>
+                        <a href="login.php">Fazer login</a>
                     </p>
 
                 </form>
