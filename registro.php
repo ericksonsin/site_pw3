@@ -34,7 +34,7 @@
 
                 <form action="" method="">
 
-                <div class="input-group mb-3">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                         </div>
@@ -62,6 +62,12 @@
                         <input type="password" name="senha" class="form-control" placeholder="Repita a senha" aria-label="Senha" aria-describedby="basic-addon1">
                     </div>
 
+                    <div class="form-group form-check">
+                        <input type="checkbox" name="termos" class="form-check-input" id="termos">
+                        <label class="form-check-label" for="exampleCheck1">Aceitar os <a href="#" data-toggle="modal" data-target="#modalTermos">termos</label>
+                    </div>
+
+
                     <div class="form-group text-right">
                         <button class="btn btn-primary">Cadastrar</button>
                     </div>
@@ -76,6 +82,24 @@
         </div>
 
     </main><!-- /.container -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalTermos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Termos Pw3</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur corporis ab neque asperiores quae sequi laborum quisquam, fuga soluta omnis molestias quis qui repudiandae repellat sint! Et quis eligendi voluptates.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Principal JavaScript do Bootstrap
     ================================================== -->
