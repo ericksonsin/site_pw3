@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <title>Validação Pw3</title>
+</head>
+<body>
+
+<div class="conteiner">
+<form action="" id="formulario1">
+    <div class="form-group">
+        <label for="nomeCompleto">Nome completo</label>
+        <input type="text" name="nomeCompleto" id="nomeCompleto">
+    </div>
+
+    <div class="form-group">
+        <label for="celular">Celular</label>
+        <input type="text" name="celular" id="celular">
+    </div>
+
+    <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="password" name="email" id="email">
+    </div>
+
+    <div class="form-group">
+        <label for="senha">Senha <small>no minimo 5 caracteres</small></label>
+        <input type="text" name="senha" id="senha">
+    </div>
+
+    <button type="submit">Salvar</button>
+</form>
+
+</div>
+
+
+<!-- incluir arquivos necessarios para jquery-validation-->  
+<script src="../js/jquery-3.js"></script>
+<script src="../jquery-validation/dist/jquery.validate.js"></script>
+<script>
+    $(document).ready(function(){
+
+        $("#formulario1").validate({
+
+            rules: {
+                nomeCompleto: 'required',
+                celular: 'required',
+                email: {
+                    required: true,
+                    email: true
+                },
+
+                senha: {
+                    required: true,
+                    minlength: 5
+                }
+
+            },
+            messages: {
+                nomeCompleto: 'O campo nome completo é obrigatorio',
+                celular: 'Informe o numero do seu celular',
+                email: {
+                    required: 'O campo e-mail é obrigatório',
+                    email: 'Informe um e-mail válido'
+                },
+
+                senha: {
+                    required: 'O campo senha é obrigatório',
+                    minlength: 'A senha deve ter no minimo 5 caracteres'
+                }
+
+            },
+
+            errorElement: "em",
+				errorPlacement: function ( error, element ) {
+					// Add the `invalid-feedback` class to the error element
+					error.addClass( "invalid-feedback" );
+
+					if ( element.prop( "type" ) === "checkbox" ) {
+						error.insertAfter( element.next( "label" ) );
+					} else {
+						error.insertAfter( element );
+					}
+				},
+				highlight: function ( element, errorClass, validClass ) {
+					$( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
+				},
+				unhighlight: function (element, errorClass, validClass) {
+					$( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
+				}
+
+        })
+
+    })
+
+</script>
+</body>
+</html>
