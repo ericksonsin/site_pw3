@@ -25,40 +25,82 @@
                     <a href="index.php">PW III</a>
                 </h1>
                 <p class="login-box-msg text-center">Crie sua conta gratuita</p>
-                <form action="" method="post" id="formCriaConta">
+
+                <?php
+
+                session_start();
+
+                if (isset($_GET['erro'])) {
+
+                    $erro = @$_SESSION['mensagemErro'];
+                    $dadosForm = $_SESSION['dadosForm'];
+
+                }
+
+                ?>
+
+                <form action="cria-conta.php" method="post" id="formCriaConta">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" name="nome" id="nome" class="form-control" placeholder="Nome completo" aria-label="nome" aria-describedby="basic-addon1">
+                        <input type="text" name="nome" id="nome" class="form-control" placeholder="Nome completo" aria-label="nome" aria-describedby="basic-addon1" value="<?php echo @$dadosForm['nome'];?>">
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
                         </div>
-                        <input type="text" name="email" id="email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1">
+                        <input type="text" name="email" id="email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1" value="<?php echo @$dadosForm['email'];?>">
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="senha" id="senha" class="form-control" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon1">
+                        <input type="password" name="senha" id="senha" class="form-control" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon1" value="<?php echo @$dadosForm['senha'];?>">
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="confirmaSenha" id="confirmaSenha" class="form-control" placeholder="Repita a senha" aria-label="Repita a senha" aria-describedby="basic-addon1">
+                        <input type="password" name="confirmaSenha" id="confirmaSenha" class="form-control" placeholder="Repita a senha" aria-label="Repita a senha" aria-describedby="basic-addon1" value="<?php echo @$dadosForm['confirmaSenha'];?>">
                     </div>
+
+                        <?php 
+                        
+                        if(@$dadosForm['termos']=='on'){
+
+                            $checked = "checked='checked' ";
+                        }
+                        
+                        ?>
+
                     <div class="form-group form-check">
-                        <input type="checkbox" name="termos" class="form-check-input" id="termos">
+                        <input type="checkbox" name="termos" class="form-check-input" id="termos" <?php echo @$checked;?>>
                         <label class="form-check-label" for="exampleCheck1">
                             Aceitar os <a href="#" data-toggle="modal" data-target="#modalTermos">termos</a>
                         </label>
                     </div>
+
+                    <?php
+
+                    if (isset($_GET['erro'])) {
+
+                        echo "<ul class='alert alert-danger'>";
+
+                        foreach ($erro as $mensagem) {
+
+                            echo "<li> $mensagem </li>";
+                        }
+
+                        echo "</ul>";
+                    }
+
+                    ?>
+
                     <div class="form-group text-right">
                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
+
                 </form>
                 <p class="mb-1">
                     <a href="login.php">Já tenho uma conta</a>
@@ -96,70 +138,71 @@
     <script src="jquery-validation/dist/jquery.validate.js"></script>
 
     <script>
-        $( document ).ready( function () {
-			$( "#formCriaConta" ).validate( {
-				rules: {
-					nome: "required",
-					email: {
-						required: true,
-						email: true
-					},
-					senha: {
-						required: true,
-						minlength: 5
-					},
-					confirmaSenha: {
-						required: true,
-						minlength: 5,
-						equalTo: "#senha"
-					},
-					email: {
-						required: true,
-						email: true
-					},
+        $(document).ready(function() {
+            $("#formCriaConta").validate({
+                rules: {
+                    nome: "required",
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    senha: {
+                        required: true,
+                        minlength: 6
+                    },
+                    confirmaSenha: {
+                        required: true,
+                        minlength: 5,
+                        equalTo: "#senha"
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
 
-                    agree: "required"
-				
-				},
-				messages: {
-					nome: "O campo nome completo é obrigatorio",
-					email: {
-						required: "O campo e-mail é obrigatório",
-						email: "Informe um e-mail válido"
-					},
-					senha: {
-						required: "O campo senha é obrigatório",
-						minlength: "A senha deve ter no minimo 5 caracteres"
-					},
-					confirmaSenha: {
-						required: "Repita a senha",
-						minlength: "A senha deve ter no minimo 5 caracteres",
-						equalTo: "Por favor, digite a mesma senha acima"
-					},
-            
-                    agree:"Por favor, aceite nossa política"
-					
-				},
-				errorElement: "em",
-				errorPlacement: function ( error, element ) {
-					// Add the `invalid-feedback` class to the error element
-					error.addClass( "invalid-feedback" );
+                    termos: "required"
 
-					if ( element.prop( "type" ) === "checkbox" ) {
-						error.insertAfter( element.next( "label" ) );
-					} else {
-						error.insertAfter( element );
-					}
-				},
-				highlight: function ( element, errorClass, validClass ) {
-					$( element ).addClass( "is-invalid" ).removeClass( "is-valid" );
-				},
-				unhighlight: function (element, errorClass, validClass) {
-					$( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
-				}
-			} );
+                },
+                messages: {
+                    nome: "O campo nome completo é obrigatorio",
+                    email: {
+                        required: "O campo e-mail é obrigatório",
+                        email: "Informe um e-mail válido"
 
-		} );
+                    },
+                    senha: {
+                        required: "O campo senha é obrigatório",
+                        minlength: "A senha deve ter no minimo 5 caracteres"
+                    },
+                    confirmaSenha: {
+                        required: "Repita a senha",
+                        minlength: "A senha deve ter no minimo 5 caracteres",
+                        equalTo: "Por favor, digite a mesma senha acima"
+                    },
+
+                    termos: "Por favor, aceite nossa política"
+
+                },
+                errorElement: "em",
+                errorPlacement: function(error, element) {
+                    // Add the `invalid-feedback` class to the error element
+                    error.addClass("invalid-feedback");
+
+                    if (element.prop("type") === "checkbox") {
+                        error.insertAfter(element.next("label"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-invalid").removeClass("is-valid");
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-valid").removeClass("is-invalid");
+                }
+            });
+
+        });
     </script>
 
 </body>
