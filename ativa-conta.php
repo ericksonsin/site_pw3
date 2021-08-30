@@ -22,8 +22,17 @@ if($totalLinhas == 1){
 
  echo "<p>Conta ativada com sucesso! </p>
         <p> <meta http-equiv='reflesh' content='1;url=login.php'> Redirecionando... </p>";
-}else
+}else{
 
-echo "Código ativação inválido";
+    echo "Código ativação inválido";
+
+
+}
+
+
+
+
+
+
 
 ?>
