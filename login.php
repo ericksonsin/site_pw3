@@ -32,21 +32,54 @@
                 </h1>
                 <p class="text-center">Faça login para iniciar a sua sessão</p>
 
-                <form action="" method="">
+
+                <?php session_start();
+
+                    if( isset($_GET['erro']) ){
+
+                        $dadosFormLogin = @$_SESSION['dadosFormLogin'];
+                        $erroLogin = @$_SESSION['mensagemErroLogin'];
+
+                    }
+                
+                
+                ?>
+
+
+                <form action="valida-login.php" method="post" id="formLogin">
 
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
                         </div>
-                        <input type="text" name="email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1">
+                        <input type="email" name="email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1" 
+                        value="<?php echo @$dadosFormLogin['email'];?>">
                     </div>
 
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="senha" class="form-control" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon1">
+                        <input type="password" name="senha" class="form-control" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon1"
+                        value="<?php echo @$dadosFormLogin['senha'];?>">
                     </div>
+
+                        <?php 
+                        
+                        if(isset($erroLogin) ){
+
+                                echo "<ul class='alert alert-danger'>";
+
+                                foreach( $erroLogin as $erro){
+
+                                    echo "<li> $erro </li>";
+                                    
+                                }
+
+                                echo "</ul>";
+                        }
+                        
+                        ?>
 
                     <div class="form-group text-right">
                         <button class="btn btn-primary">Entrar</button>
