@@ -45,7 +45,7 @@ if( $totalLinhas < 1 ){
 
 }
 
-if($dadosUsuario['status_login'] == 0){
+if($dadosUsuario['status_login'] == 0  && $totalLinhas > 0 ){
     $cod_ativacao = $dadosUsuario['cod_ativacao'];
     $mensagem = "você ainda não ativou sua conta. Ativar agora.
                     <a href='ativa-conta.php?codigoAtivacao=$cod_ativacao'>Ativar Agora</a>";

@@ -1,4 +1,4 @@
-<?php session_start();
+<?php include("verifica-logado.php");
 
 
 ?>
@@ -53,7 +53,7 @@
           </li>
         </ul>
         <div class="my-2 my-lg-0">
-          <a href="../login.php" class="btn btn-outline-success"><i class="fas fa-sign-out-alt"></i> Sair</a>
+          <a href="logoff.php" class="btn btn-outline-success"><i class="fas fa-sign-out-alt"></i> Sair</a>
         </div>
       </div>
     </nav>
