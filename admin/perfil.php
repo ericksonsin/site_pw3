@@ -21,7 +21,7 @@
 
     <div class="col-sm-4 offset-sm-4 text-center">
 
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="">
             <div class="form-group">
                 <label>Alterar imagem <i>(.jpg .png .bmp)</i></label>
                 <input type="file" name="imagem" required class="form-control">
@@ -49,4 +49,4 @@
             </div>
         </form>
     </div>
-   
+  
