@@ -50,32 +50,3 @@
         </form>
     </div>
     <br>
-
-    <div class="row">
-        <?php
-
-        $pasta = "imagens";
-
-        $files = scandir($pasta);
-
-        //remover a posição 0 e 1 do array 1
-
-        unset($files[0]);
-        unset($files[1]);
-
-        foreach ($files as $imagem) {
-            echo "<div class= 'col-sm-3 mb-3 text-center'>
-            <img src='imagens/$imagem' width='200' height='200'>
-
-                     <a href='deletaImagem.php?imagem=$imagem'
-                     class='btn btn-primary form-control mt-2'>
-                      Excluir
-                    </a>
-
-                    </div>";
-        }
-
-        ?>
-
-    </div>
-</div> <!-- fim container-->
