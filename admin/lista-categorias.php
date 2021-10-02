@@ -48,7 +48,7 @@ if(isset($_GET['msg'])){
 
   include("../connection/conexao.php");
 
-  //execitar a instrução sql
+  //executar a instrução sql
 
   $executa = $mysqli->query($sql);
 
@@ -66,9 +66,7 @@ if(isset($_GET['msg'])){
   }else{
  //obter os dados retornados pela consulta
 
- 
-
-while($dados = $executa->fetch_assoc() ){
+ while($dados = $executa->fetch_assoc() ){
 
   ?>
 
