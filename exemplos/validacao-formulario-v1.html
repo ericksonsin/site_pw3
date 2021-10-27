@@ -1,42 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <title>Validação Pw3</title>
-</head>
-<body>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
 
-<div class="conteiner">
-<form action="" id="formulario1">
-    <div class="form-group">
-        <label for="nomeCompleto">Nome completo</label>
-        <input type="text" name="nomeCompleto" id="nomeCompleto">
-    </div>
-    <button type="submit">Salvar</button>
-</form>
-
+<div class="container">
+    <form action="" id="formulario1" class="mt-2">
+        <div class="form-group">
+            <label for="nomeCompleto">Nome completo</label>
+            <input type="text" name="nomeCompleto" id="nomeCompleto">
+        </div>
+        <button>Salvar</button>
+    </form>
 </div>
 
-
-<!-- incluir arquivos necessarios para jquery-validation-->  
+<!-- adicionar o jquery -->
 <script src="../js/jquery-3.js"></script>
-<script src="../jquery-validation/dist/jquery.validate.js"></script>
+
+<!-- adicionar o jquery-validate -->
+<script src="../jquery-validation/dist/jquery.validate.min.js"></script>
+
 <script>
     $(document).ready(function(){
 
-        $("#formulario1").validate({
+        $("#formulario1").validate( {
 
             rules: {
                 nomeCompleto: 'required'
             },
+            
             messages: {
-                nomeCompleto: 'O campo nome completo é obrigatorio'
+                nomeCompleto: 'O campo nome completo nome é obrigatório'
             },
 
-            errorElement: "em",
+            errorElement: "div",
 				errorPlacement: function ( error, element ) {
 					// Add the `invalid-feedback` class to the error element
 					error.addClass( "invalid-feedback" );
@@ -54,10 +47,7 @@
 					$( element ).addClass( "is-valid" ).removeClass( "is-invalid" );
 				}
 
-        })
+        } );
 
-    })
-
+    });
 </script>
-</body>
-</html>

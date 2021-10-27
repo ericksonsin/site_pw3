@@ -18,59 +18,55 @@
   </div>
 </div>
 
-<!--receber e exibir a mensagem que esta sendo enviada via GET -->
+<!-- receber e exibir a mensagem que está sendo enviada via GET  -->
 
 <?php
-
 if (isset($_GET['msg'])) {
-  echo "<div class= 'alert alert-success'>" . $_GET['msg'] . " </div>";
+  echo "<div class='alert alert-success'>" . $_GET['msg'] . "</div>";
 }
+
+
+$cod_login = $_SESSION['cod_login'];
+
+// criar a consulta para exibir as categorias
+$sql = " SELECT * FROM tbl_produto WHERE produto_usuario='$cod_login' ";
+
+// incluir a conexao
+include("../connection/conexao.php");
+
+// executar a instrução sql
+$executa = $mysqli->query($sql);
+
+// obter o número de linhas
+$totalLinhas = $executa->num_rows;
+
+if ($totalLinhas < 1) {
+  echo "<div class='row'>
+            <div class='col-sm-6'> Não existem anúncios cadastrados. </div>
+          </div>";
+} else {
+
+  while ($dados = $executa->fetch_assoc()) { ?>
+
+    <div class="row border-bottom">
+      <div class="col-sm-3">
+        <?php if (strlen($dados['imagem']) > 0) {
+          echo "<img src='../imagens/" . $dados['imagem'] . "'width='120' height='120'>";
+        } else {
+          echo "<img src='../imagens/imagem_padrao.jpg' width='120' height='120'>";
+        } ?>
+      </div>
+      <div class="col-sm-7">
+        <p> Categoria </p>
+        <p><?php echo '#' . $dados['cod_produto'] . ' - ' . $dados['nome_produto']; ?> </p>
+        <p>R$ <?php echo $dados['preco']; ?> </p>
+      </div>
+      <div class="col-sm-1 text-right"><a href="#"><i class="fas fa-edit"></i> Editar</a></div>
+      <div class="col-sm-1"><a href="#"><i class="fas fa-trash-alt"></i> Excluir</a></div>
+    </div>
+
+<?php } // fim do while
+
+} // fim do else
+
 ?>
-
-<table class="table table-condensed">
-  <tr>
-    <td><strong>cod Produto</strong></td>
-    <td><strong>Categoria</strong></td>
-    <td><strong>Produto</strong></td>
-    <td><strong>Preço</strong></td>
-  </tr>
-    
-  <?php
-  // incluir a conexao 
-  include("../connection/conexao.php");
-
-  //criar uma consulta na tbl_produto
-  $sql = "SELECT * FROM tbl_produto";
-
-  //execultar a consulta
-  $executa = $mysqli->query($sql);
-
-  //obter o numero de linhas dessa consulta
-  $totalLinhas = $executa->num_rows;
-
-  //utilizando o while para exbir os produtos que foram cadastrados
-
-  if( $totalLinhas < 1 ){
-    echo "<tr>
-    <td colspan='4'> Não existem anúncios cadastradas. </td>
-    </tr>";
-
-}else{
-//obter os dados retornados pela consulta
-
-while($dados = $executa->fetch_assoc() ){
-
-?>
-
-  <tr>
-    <td scope="col"><?php echo $dados['cod_produto'];?> </td>
-    <td scope="col"><?php echo $dados['categoria_produto'];?> </td>
-    <td scope="col"><?php echo $dados['nome_produto'];?> </td>
-    <td scope="col"><?php echo $dados['preco'];?> </td>
-    <td><a href="#">Editar</a></td>
-    <td><a href="#">Excluir</a></td>
-  </tr>
-<?php  }// fim do while
-} //fim do else ?>
-  
-</table>

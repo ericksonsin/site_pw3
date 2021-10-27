@@ -7,121 +7,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon/pw3.ico">
-    <title>Criar conta - PW3</title>
+    <!-- <link rel="icon" href="favicon/icone.ico"> -->
+
+    <title>Criar conta</title>
+
     <!-- Principal CSS do Bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">
+
     <!-- Estilos customizados para esse template -->
     <link href="css/starter-template.css" rel="stylesheet">
+
     <!-- FONTAWESOME -->
-    <script src="https://kit.fontawesome.com/77f3dd62a7.js" crossorigin="anonymous"></script>
+    <script src="js/fontawesome.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body cz-shortcut-listen="true" class="bg-secondary">
+
     <main role="main" class="container">
+
         <div class="row">
             <div class="col-sm-4 offset-sm-4 bg-white mt-5 border rounded bg-white">
                 <h1 class="h4 text-center">
-                    <a href="index.php">PW III</a>
+                    <a href="index.php">Home</a>
                 </h1>
                 <p class="login-box-msg text-center">Crie sua conta gratuita</p>
 
-                <?php
-
-                session_start();
-
+                <?php session_start();
                 if (isset($_GET['erro'])) {
-
-                    $erro = @$_SESSION['mensagemErro'];
                     $dadosForm = $_SESSION['dadosForm'];
-
+                    $erro = @$_SESSION['erro'];
                 }
 
                 ?>
-
                 <form action="cria-conta.php" method="post" id="formCriaConta">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" name="nome" id="nome" class="form-control" placeholder="Nome completo" aria-label="nome" aria-describedby="basic-addon1" value="<?php echo @$dadosForm['nome'];?>">
+                        <input type="text" name="nome" class="form-control" placeholder="Nome completo" aria-label="nome" aria-describedby="basic-addon1"
+                        value="<?php echo @$dadosForm['nome'];?>">
                     </div>
+
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
                         </div>
-                        <input type="text" name="email" id="email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1" value="<?php echo @$dadosForm['email'];?>">
+                        <input type="text" name="email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1"
+                        value="<?php echo @$dadosForm['email'];?>">
                     </div>
+
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="senha" id="senha" class="form-control" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon1" value="<?php echo @$dadosForm['senha'];?>">
+                        <input type="password" name="senha" id="senha" class="form-control" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon1"
+                        value="<?php echo @$dadosForm['senha'];?>">
                     </div>
+
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="confirmaSenha" id="confirmaSenha" class="form-control" placeholder="Repita a senha" aria-label="Repita a senha" aria-describedby="basic-addon1" value="<?php echo @$dadosForm['confirmaSenha'];?>">
+                        <input type="password" name="confirmaSenha" class="form-control" placeholder="Repita a senha" aria-label="Repita a senha" aria-describedby="basic-addon1"
+                        value="<?php echo @$dadosForm['confirmaSenha'];?>">
                     </div>
 
-                        <?php 
-                        
-                        if(@$dadosForm['termos']=='on'){
-
-                            $checked = "checked='checked' ";
-                        }
-                        
-                        ?>
-
+                    <?php if(@$dadosForm['termos']=='on'){
+                        $checked="checked='checked'";
+                    }?>
                     <div class="form-group form-check">
-                        <input type="checkbox" name="termos" class="form-check-input" id="termos" <?php echo @$checked;?>>
-                        <label class="form-check-label" for="exampleCheck1">
-                            Aceitar os <a href="#" data-toggle="modal" data-target="#modalTermos">termos</a>
-                        </label>
+                        <input type="checkbox" name="termos" class="form-check-input" id="termos" <?php echo @$checked; ?>>
+                        <label class="form-check-label" for="exampleCheck1">Aceitar os <a href="#" data-toggle="modal" data-target="#modalTermos">termos</a> </label>
                     </div>
 
-                    <?php
-
-                    if (isset($_GET['erro'])) {
-
+                    <?php if(isset($_GET['erro'])){
                         echo "<ul class='alert alert-danger'>";
-
-                        foreach ($erro as $mensagem) {
-
-                            echo "<li> $mensagem </li>";
-                        }
-
+                            foreach($_SESSION['mensagemErro'] as $erro){
+                                echo "<li>
+                                        $erro
+                                      </li>";
+                            }
                         echo "</ul>";
-                    }
-
-                    ?>
+                    }?>
 
                     <div class="form-group text-right">
                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
 
+                          
                 </form>
+
                 <p class="mb-1">
                     <a href="login.php">Já tenho uma conta</a>
                 </p>
+
             </div>
         </div>
+
     </main><!-- /.container -->
+
     <!-- Modal -->
     <div class="modal fade" id="modalTermos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Termos PW3</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Termos site PW3</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem quasi at magnam mollitia cupiditate assumenda, error quod ut doloribus ex ea nemo accusantium necessitatibus? Enim ipsa reiciendis cumque accusantium necessitatibus.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem beatae pariatur corrupti nostrum alias recusandae? Porro, magnam a deserunt natus illo cupiditate aut cumque nam earum minima voluptas accusamus iste.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint animi optio quaerat, dolorem fugit voluptas id, quos ducimus at alias eius quae voluptatibus provident perspiciatis aut molestiae iste magni cumque.</p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore voluptatum non accusamus ea ad ab provident molestiae, porro sed. Delectus facere, pariatur eveniet iusto unde numquam repellendus consectetur commodi ducimus?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -135,59 +133,53 @@
     <!-- Foi colocado no final para a página carregar mais rápido -->
     <script src="js/jquery-3.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="jquery-validation/dist/jquery.validate.js"></script>
-
-    <script>
+        <!-- Adicionar jquery validate -->
+        <script src="jquery-validation/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript">
         $(document).ready(function() {
-            $("#formCriaConta").validate({
+            $('#formCriaConta').validate({
                 rules: {
-                    nome: "required",
+                    nome: {
+                        required: true
+                    },
                     email: {
-                        required: true,
-                        email: true
+                      required: true,
+                      email: true
                     },
                     senha: {
-                        required: true,
-                        minlength: 6
-                    },
+                      required: true,
+                      minlength: 6
+                    }, 
                     confirmaSenha: {
-                        required: true,
-                        minlength: 5,
-                        equalTo: "#senha"
+                      equalTo: "#senha"
                     },
-                    email: {
-                        required: true,
-                        email: true
+                    termos: {
+                        required: true
                     },
-
-                    termos: "required"
-
                 },
                 messages: {
-                    nome: "O campo nome completo é obrigatorio",
+                    nome: {
+                        required: "O campo nome é obrigatório"
+                    },
                     email: {
-                        required: "O campo e-mail é obrigatório",
-                        email: "Informe um e-mail válido"
-
+                      required: "Informe o seu e-mail",
+                      email: "Utilize um e-mail válido"
                     },
                     senha: {
-                        required: "O campo senha é obrigatório",
-                        minlength: "A senha deve ter no minimo 5 caracteres"
+                      required: "A senha é obrigatória",
+                      minlength: "A senha deve ter no mínimo 6 caracteres"
                     },
                     confirmaSenha: {
-                        required: "Repita a senha",
-                        minlength: "A senha deve ter no minimo 5 caracteres",
-                        equalTo: "Por favor, digite a mesma senha acima"
+                      equalTo: "Senhas não conferem"
                     },
-
-                    termos: "Por favor, aceite nossa política"
-
+                    termos: {
+                        required: "Você deve aceitar os temos para criar a conta"
+                    },
                 },
-                errorElement: "em",
+                errorElement: 'span',
                 errorPlacement: function(error, element) {
-                    // Add the `invalid-feedback` class to the error element
-                    error.addClass("invalid-feedback");
-
+                    error.addClass('invalid-feedback');
+                    
                     if (element.prop("type") === "checkbox") {
                         error.insertAfter(element.next("label"));
                     } else {
@@ -195,16 +187,14 @@
                     }
                 },
                 highlight: function(element, errorClass, validClass) {
-                    $(element).addClass("is-invalid").removeClass("is-valid");
+                    $(element).addClass('is-invalid');
                 },
                 unhighlight: function(element, errorClass, validClass) {
-                    $(element).addClass("is-valid").removeClass("is-invalid");
+                    $(element).removeClass('is-invalid');
                 }
             });
-
         });
     </script>
-
 </body>
 
 </html>

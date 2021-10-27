@@ -1,36 +1,31 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-    <li class="breadcrumb-item"><a href="index.php?pg=lista-categorias">Categorias</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Cadastro de Categoria</li>
+  <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+  <li class="breadcrumb-item"><a href="index.php?pg=lista-categorias">Categorias</a></li>
+  <li class="breadcrumb-item active" aria-current="page">Cadastro de Categoria</li>
   </ol>
 </nav>
 
-<?php
-
-//receber via get a operação
-
+<?php 
+// receber via get a operacao
 $operacao = $_GET['operacao'];
 
-if ($operacao == "editar") {
+if( $operacao == "editar" ){
 
   $cod_categoria = $_GET['cod_categoria'];
 
-  //criar consulta
+  // criar a consulta
+  $sql = "SELECT * FROM tbl_categoria  WHERE cod_categoria='$cod_categoria' ";
 
-  $sql = "SELECT * FROM tbl_categoria WHERE cod_categoria='$cod_categoria'";
-
-  //incluir a conexão
-
+  // incluir a conexao
   include("../connection/conexao.php");
 
   // executar a consulta
-
   $executa = $mysqli->query($sql);
 
-  //obter dados da consulta
-
+  // obter os dados da consulta
   $dados = $executa->fetch_assoc();
+
 }
 
 ?>
@@ -38,16 +33,16 @@ if ($operacao == "editar") {
 <div class="row">
   <div class="col-sm-4">
     <form action="acoes-categoria.php" method="POST">
-
+      
       <div class="form-group">
         <label for="categoria">Categoria</label>
-        <input type="text" class="form-control" id="categoria" placeholder="Informe o nome da categoria" name="categoria" required value="<?php echo @$dados['categoria']; ?>">
+        <input type="text" class="form-control" id="categoria" placeholder="Informe o nome da categoria" name="categoria" required value="<?php echo @$dados['categoria'];?>">
       </div>
 
       <!-- Campo para armazenar o código da categoria na operação "editar" -->
-      <input type="hidden" name="cod_categoria" value="<?php echo $dados['cod_categoria']; ?>">
-
-      <input type="hidden" name="operacao" value="<?php echo $operacao; ?>">
+      <input type="hidden" name="cod_categoria" value="<?php echo $dados['cod_categoria'];?>">
+      
+      <input type="hidden" name="operacao" value="<?php echo $operacao;?>">
 
       <button type="submit" class="btn btn-primary">Salvar</button>
 

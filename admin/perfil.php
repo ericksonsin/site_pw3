@@ -1,52 +1,59 @@
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Perfil</li>
-    </ol>
-</nav>
+    <!-- Content Header (Page header) -->
+    <ol class="breadcrumb ">
+              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+              <li class="breadcrumb-item active">Perfil</li>
+            </ol>
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h4 class="m-0 text-dark">Perfil</h4>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+           
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
-<h4>Perfil</h4>
+<div class="row">
+    <div class="col-md-4 offset-md-4">
 
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 text-center">
+      <form action="#" method="post" enctype="multipart/form-data">
+        <div class="form-group mb-3">
+          <label>Alterar imagem <small>(<i>.jpg .png .bmp</i>)</small></label>
+          <input type="file" class="form-control" name="imagem" id="imagem">
         </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-append"> 
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div><input type="text" class="form-control" name="nome" id="nome" placeholder="Nome completo" value="<?php echo $_SESSION['nome']; ?>" required>
+          
+        </div>
+        <div class="input-group mb-3">
+         <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div> <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $_SESSION['email']; ?>" readonly disabled>
+          
+        </div>
+
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-md-2 offset-sm-8">
+            <button type="submit" class="btn btn-primary btn-block">Atualizar</button>
+          </div>
+          <!-- /.col -->
+        </div>
+
+       <br> 
+         
+      </form>
     </div>
-
-</div>
-</div>
-
-<div class="container bg-white">
-
-    <div class="col-sm-4 offset-sm-4 text-center">
-
-        <form action="" method="POST" enctype="">
-            <div class="form-group">
-                <label>Alterar imagem <i>(.jpg .png .bmp)</i></label>
-                <input type="file" name="imagem" required class="form-control">
-            </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-                </div>
-                <input type="text" name="nome" class="form-control" placeholder="Nome Completo" aria-label="nome" aria-describedby="basic-addon1">
-            </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
-                </div>
-                <input type="email" name="email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1" disabled>
-            </div>
-
-            
-            <div class="col-sm-6 offset-sm-3 text-center">
-                <button type="submit" class="btn btn-primary form-control">
-                    Atualizar
-                </button>
-            </div>
-        </form>
-    </div>
-    
+    <!-- /.form-box -->
+  </div>

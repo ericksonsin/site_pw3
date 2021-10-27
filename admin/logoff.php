@@ -1,10 +1,8 @@
 <?php session_start();
 
-// destruir todas as variaveis de sessão (usuario clicar em sair)
-
+// destruir todas as variaveis de sessao
 session_destroy();
 
 header("location:../login.php");
-
 
 ?>

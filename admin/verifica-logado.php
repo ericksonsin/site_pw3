@@ -1,12 +1,11 @@
 <?php @session_start();
 
-//se a variavel de sessão cod_login não existir direcionamos o usuario para tela de login
+// se a variavel de sessao cod_login não existir direcionamos o usuario para a tela de login
 
-if(!isset($_SESSION['cod_login']) ){
+if( !isset($_SESSION['cod_login']) ){
 
     header("location:../login.php");
 
 }
-
 
 ?>

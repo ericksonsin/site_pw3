@@ -1,38 +1,52 @@
 <?php session_start();
 
-//receber os campos do form
- // menos o campo da imagem
-
-$cod_login = $_SESSION['cod_login'];
+// receber os campos do form
+// categoria_produto  -   nome_produto   -   descricao  - preco
+// *  menos o campo da imagem
 $categoria_produto = $_POST['categoria_produto'];
 $nome_produto = $_POST['nome_produto'];
 $preco = $_POST['preco'];
 $descricao = $_POST['descricao'];
+
+$cod_login = $_SESSION['cod_login'];
 $operacao = $_POST['operacao'] ?: $_GET['operacao'];
 
-if($operacao == 'cadastrar'){
+$imagem = $_FILES['imagem']['name']; //nome original do arquivo
+$imagem_temporario = $_FILES['imagem']['tmp_name']; //nome temporario
 
-$sql = "INSERT INTO tbl_produto
-                    (categoria_produto,nome_produto,preco,descricao,produto_usuario)
-                    VALUES 
-                    ('$categoria_produto','$nome_produto','$preco','$descricao','$cod_login')";
+//obter a extensão do arquivo
+$extensao_imagem = strtolower(strrchr($imagem,'.'));
+$novo_nome = "imagem_" . time().$extensao_imagem;
 
-$mensagem = "Produto adicionado com sucesso!";  
 
-}// fim cadastrar
+if ($operacao == 'cadastrar') {
 
-//incluir a conexao
+    //fazer o upload
+    if (strlen($imagem) > 0) {
+        copy($imagem_temporario,"../imagens/$novo_nome");
+    } else {
+        $novo_nome = "";
+    }
+
+    $sql = "INSERT INTO tbl_produto 
+                (categoria_produto,nome_produto,preco,descricao,produto_usuario,imagem)
+                VALUES
+                ('$categoria_produto','$nome_produto','$preco','$descricao','$cod_login','$novo_nome')";
+
+
+
+    $mensagem = "Anúncio adicionado com sucesso!";
+} // fim se cadastrar
+
+
+// incluir a conexao
 include("../connection/conexao.php");
 
-//executar o SQl
+// executar a instrução SQL
 $executa = $mysqli->query($sql);
 
-// verificar se o sql foi executado e redirecionado para "lista de anuncios" com a mesagem de erro ou sucesso
-
-if( $executa  ){
-            header("location:index.php?pg=lista-anuncios&msg=$mensagem");
-}else{
-            header("location:index.php?pg=lista-anuncios&msg=Erro ao adicionar o produto, contate o administrador.");
+if ($executa) {
+    header("location:index.php?pg=lista-anuncios&msg=$mensagem");
+} else {
+    header("location:index.php?pg=lista-anuncios&msg=Erro ao executar, contate o administrador.");
 }
-
-?>
